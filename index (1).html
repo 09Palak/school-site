@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Meridian Hill School — Inspiring Minds. Building Futures.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --ink:#0E2A2B;
+    --ink-2:#123638;
+    --brass:#B8863E;
+    --brass-light:#D9B478;
+    --paper:#FFFFFF;
+    --sage:#EEF2EC;
+    --sage-2:#DCE6DA;
+    --text:#16201F;
+    --text-soft:#4A5754;
+  }
+  :root:not([data-theme="light"]){}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){}
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--text);
+    background:var(--paper);
+    overflow-x:hidden;
+  }
+  .font-display{font-family:'Fraunces',serif;}
+  ::selection{background:var(--brass-light);color:var(--ink);}
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{width:10px;}
+  ::-webkit-scrollbar-track{background:var(--sage);}
+  ::-webkit-scrollbar-thumb{background:var(--brass);border-radius:6px;}
+
+  /* Reveal on scroll */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-36px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1);}
+  .reveal-left.in{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(36px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1);}
+  .reveal-right.in{opacity:1;transform:translateX(0);}
+  .reveal-scale{opacity:0;transform:scale(.94);transition:opacity .7s cubic-bezier(.16,.84,.44,1),transform .7s cubic-bezier(.16,.84,.44,1);}
+  .reveal-scale.in{opacity:1;transform:scale(1);}
+  .stagger > *{transition-delay:calc(var(--i,0) * 90ms);}
+
+  /* Nav */
+  #nav{transition:background-color .4s ease,box-shadow .4s ease,padding .4s ease;}
+  #nav.scrolled{background:rgba(255,255,255,.92);backdrop-filter:blur(14px);box-shadow:0 8px 30px rgba(14,42,43,.08);}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;bottom:-4px;width:0;height:1.5px;background:var(--brass);transition:width .3s ease;}
+  .nav-link:hover::after{width:100%;}
+
+  /* Buttons */
+  .btn-brass{background:var(--brass);color:#fff;transition:all .35s cubic-bezier(.16,.84,.44,1);}
+  .btn-brass:hover{background:var(--ink);transform:translateY(-2px);box-shadow:0 12px 24px rgba(14,42,43,.22);}
+  .btn-outline{border:1.5px solid var(--paper);color:#fff;transition:all .35s ease;}
+  .btn-outline:hover{background:#fff;color:var(--ink);}
+  .btn-ink{background:var(--ink);color:#fff;transition:all .35s cubic-bezier(.16,.84,.44,1);}
+  .btn-ink:hover{background:var(--brass);transform:translateY(-2px);}
+
+  /* Cards */
+  .lift{transition:transform .45s cubic-bezier(.16,.84,.44,1),box-shadow .45s ease;}
+  .lift:hover{transform:translateY(-8px);box-shadow:0 24px 48px rgba(14,42,43,.14);}
+  .zoom-img{transition:transform .8s cubic-bezier(.16,.84,.44,1);}
+  .zoom-wrap:hover .zoom-img{transform:scale(1.08);}
+
+  /* Modal */
+  .modal-backdrop{opacity:0;pointer-events:none;transition:opacity .35s ease;}
+  .modal-backdrop.open{opacity:1;pointer-events:auto;}
+  .modal-panel{opacity:0;transform:translateY(24px) scale(.97);transition:opacity .4s cubic-bezier(.16,.84,.44,1),transform .4s cubic-bezier(.16,.84,.44,1);}
+  .modal-backdrop.open .modal-panel{opacity:1;transform:translateY(0) scale(1);}
+
+  /* Loader */
+  #loader{transition:opacity .6s ease, visibility .6s ease;}
+  #loader.hide{opacity:0;visibility:hidden;}
+
+  .divider-brass{width:56px;height:3px;background:var(--brass);}
+
+  .carousel-track{transition:transform .6s cubic-bezier(.16,.84,.44,1);}
+
+  input:focus,textarea:focus,select:focus{outline:none;box-shadow:0 0 0 3px rgba(184,134,62,.25);border-color:var(--brass);}
+
+  .marquee-track{animation:marquee 32s linear infinite;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  .float-slow{animation:floaty 7s ease-in-out infinite;}
+  .float-slow-rev{animation:floaty 8s ease-in-out infinite reverse;}
+  @keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1!important;transform:none!important;transition:none!important;}
+    .float-slow,.float-slow-rev,.marquee-track{animation:none!important;}
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<!-- LOADER -->
+<div id="loader" class="fixed inset-0 z-[100] flex items-center justify-center" style="background:var(--ink);">
+  <div class="text-center">
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" class="mx-auto mb-4">
+      <circle cx="28" cy="28" r="24" stroke="#D9B478" stroke-width="2" opacity="0.3"/>
+      <path d="M28 4a24 24 0 0 1 24 24" stroke="#D9B478" stroke-width="2" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="0 28 28" to="360 28 28" dur="1s" repeatCount="indefinite"/>
+      </path>
+    </svg>
+    <p class="text-white/70 text-sm tracking-wide font-display italic">Meridian Hill School</p>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 px-5 md:px-10 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-3">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none">
+        <polygon points="21,3 39,13 21,23 3,13" fill="#0E2A2B"/>
+        <polygon points="21,13 39,23 21,33 3,23" fill="#B8863E"/>
+        <rect x="18" y="26" width="6" height="12" fill="#0E2A2B"/>
+      </svg>
+      <div class="leading-tight">
+        <p class="font-display text-lg font-semibold" style="color:var(--ink);">Meridian Hill</p>
+        <p class="text-[10px] tracking-[0.2em] uppercase" style="color:var(--brass);">School</p>
+      </div>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-8 text-sm font-medium" style="color:var(--ink);">
+      <a href="#about" class="nav-link">About Us</a>
+      <a href="#academics" class="nav-link">Academics</a>
+      <a href="#admissions" class="nav-link">Admissions</a>
+      <a href="#campus-life" class="nav-link">Campus Life</a>
+      <a href="#facilities" class="nav-link">Facilities</a>
+      <a href="#events" class="nav-link">Events</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#achievements" class="nav-link">Achievements</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button onclick="openModal('admissionModal')" class="hidden md:inline-flex btn-brass text-sm font-semibold px-5 py-2.5 rounded-full">Enquire Now</button>
+      <button id="hamburger" class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5" aria-label="Menu">
+        <span class="w-6 h-0.5 bg-[var(--ink)] transition-all" id="bar1"></span>
+        <span class="w-6 h-0.5 bg-[var(--ink)] transition-all" id="bar2"></span>
+        <span class="w-6 h-0.5 bg-[var(--ink)] transition-all" id="bar3"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="lg:hidden hidden mt-4 bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-4 text-[var(--ink)] font-medium">
+    <a href="#about" class="mobile-link">About Us</a>
+    <a href="#academics" class="mobile-link">Academics</a>
+    <a href="#admissions" class="mobile-link">Admissions</a>
+    <a href="#campus-life" class="mobile-link">Campus Life</a>
+    <a href="#facilities" class="mobile-link">Facilities</a>
+    <a href="#events" class="mobile-link">Events</a>
+    <a href="#gallery" class="mobile-link">Gallery</a>
+    <a href="#achievements" class="mobile-link">Achievements</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <button onclick="openModal('admissionModal')" class="btn-brass text-sm font-semibold px-5 py-3 rounded-full mt-2">Enquire Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden" style="background:linear-gradient(160deg,var(--ink) 0%,var(--ink-2) 55%,#0a2223 100%);">
+  <!-- decorative campus skyline illustration -->
+  <svg class="absolute bottom-0 left-0 w-full opacity-90" viewBox="0 0 1440 340" fill="none" preserveAspectRatio="none" style="height:42vh;">
+    <rect x="0" y="140" width="1440" height="200" fill="#0A2223"/>
+    <rect x="60" y="90" width="180" height="250" fill="#123638"/>
+    <rect x="90" y="120" width="26" height="26" fill="#B8863E" opacity="0.7"/>
+    <rect x="140" y="120" width="26" height="26" fill="#B8863E" opacity="0.5"/>
+    <rect x="190" y="120" width="26" height="26" fill="#B8863E" opacity="0.7"/>
+    <rect x="90" y="170" width="26" height="26" fill="#B8863E" opacity="0.5"/>
+    <rect x="140" y="170" width="26" height="26" fill="#B8863E" opacity="0.7"/>
+    <rect x="190" y="170" width="26" height="26" fill="#B8863E" opacity="0.5"/>
+    <polygon points="150,60 60,90 240,90" fill="#B8863E"/>
+    <rect x="300" y="160" width="130" height="180" fill="#0F3132"/>
+    <rect x="470" y="60" width="220" height="280" fill="#123638"/>
+    <rect x="500" y="100" width="20" height="34" fill="#B8863E" opacity="0.6"/>
+    <rect x="540" y="100" width="20" height="34" fill="#B8863E" opacity="0.4"/>
+    <rect x="580" y="100" width="20" height="34" fill="#B8863E" opacity="0.6"/>
+    <rect x="620" y="100" width="20" height="34" fill="#B8863E" opacity="0.4"/>
+    <rect x="500" y="160" width="20" height="34" fill="#B8863E" opacity="0.4"/>
+    <rect x="540" y="160" width="20" height="34" fill="#B8863E" opacity="0.6"/>
+    <rect x="580" y="160" width="20" height="34" fill="#B8863E" opacity="0.4"/>
+    <rect x="620" y="160" width="20" height="34" fill="#B8863E" opacity="0.6"/>
+    <rect x="580" y="230" width="60" height="110" fill="#0A2223"/>
+    <rect x="740" y="130" width="160" height="210" fill="#0F3132"/>
+    <circle cx="820" cy="90" r="36" fill="#123638"/>
+    <rect x="940" y="180" width="200" height="160" fill="#123638"/>
+    <rect x="970" y="210" width="24" height="24" fill="#B8863E" opacity="0.6"/>
+    <rect x="1010" y="210" width="24" height="24" fill="#B8863E" opacity="0.4"/>
+    <rect x="1050" y="210" width="24" height="24" fill="#B8863E" opacity="0.6"/>
+    <rect x="1090" y="210" width="24" height="24" fill="#B8863E" opacity="0.4"/>
+    <rect x="1180" y="70" width="200" height="270" fill="#0F3132"/>
+    <rect x="1210" y="110" width="26" height="26" fill="#B8863E" opacity="0.5"/>
+    <rect x="1256" y="110" width="26" height="26" fill="#B8863E" opacity="0.7"/>
+    <rect x="1302" y="110" width="26" height="26" fill="#B8863E" opacity="0.5"/>
+    <rect x="1210" y="160" width="26" height="26" fill="#B8863E" opacity="0.7"/>
+    <rect x="1256" y="160" width="26" height="26" fill="#B8863E" opacity="0.5"/>
+    <rect x="1302" y="160" width="26" height="26" fill="#B8863E" opacity="0.7"/>
+    <line x1="0" y1="338" x2="1440" y2="338" stroke="#B8863E" stroke-width="2" opacity="0.5"/>
+  </svg>
+
+  <div class="absolute top-24 right-[8%] w-24 h-24 rounded-full float-slow" style="background:radial-gradient(circle,rgba(184,134,62,.35),transparent 70%);"></div>
+  <div class="absolute top-[40%] left-[6%] w-16 h-16 rounded-full float-slow-rev" style="background:radial-gradient(circle,rgba(220,230,218,.18),transparent 70%);"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 md:px-10 pt-32 pb-20 grid lg:grid-cols-[1.3fr_1fr] gap-14 items-center w-full">
+    <div>
+      <div class="reveal in flex items-center gap-3 mb-6">
+        <span class="divider-brass"></span>
+        <span class="text-[13px] tracking-widest uppercase text-[var(--brass-light)] font-medium">Est. 1998 · CBSE &amp; IB World School</span>
+      </div>
+      <h1 class="reveal in font-display text-white font-semibold leading-[1.05] text-5xl sm:text-6xl md:text-7xl mb-6">
+        Meridian Hill<br/><span class="italic font-normal" style="color:var(--brass-light);">School</span>
+      </h1>
+      <p class="reveal in text-white/60 text-xl md:text-2xl font-display italic mb-5" style="transition-delay:.15s;">Inspiring Minds. Building Futures.</p>
+      <p class="reveal in text-white/70 text-base md:text-lg max-w-xl mb-10 leading-relaxed" style="transition-delay:.25s;">Empowering students with knowledge, creativity, confidence and character — on a 12-acre campus designed for how children actually learn.</p>
+      <div class="reveal in flex flex-wrap gap-4" style="transition-delay:.35s;">
+        <a href="#about" class="btn-brass px-7 py-3.5 rounded-full font-semibold text-sm">Explore Our School</a>
+        <button onclick="openModal('admissionModal')" class="btn-outline px-7 py-3.5 rounded-full font-semibold text-sm">Admissions Open</button>
+      </div>
+    </div>
+
+    <div class="reveal-scale in relative hidden lg:block" style="transition-delay:.2s;">
+      <div class="relative rounded-[28px] overflow-hidden shadow-2xl" style="aspect-ratio:4/5;background:linear-gradient(155deg,#1a4547,#0c2b2c);">
+        <svg viewBox="0 0 400 500" class="w-full h-full">
+          <rect width="400" height="500" fill="url(#heroGrad)"/>
+          <defs>
+            <linearGradient id="heroGrad" x1="0" y1="0" x2="400" y2="500">
+              <stop offset="0" stop-color="#1a4547"/>
+              <stop offset="1" stop-color="#0a2223"/>
+            </linearGradient>
+          </defs>
+          <circle cx="320" cy="90" r="46" fill="#D9B478" opacity="0.85"/>
+          <path d="M0 380 Q100 330 200 370 T400 350 V500 H0 Z" fill="#123638"/>
+          <path d="M0 420 Q120 380 240 415 T400 400 V500 H0 Z" fill="#0A2223"/>
+          <g opacity="0.9">
+            <circle cx="150" cy="430" r="34" fill="#B8863E"/>
+            <rect x="140" y="454" width="20" height="46" fill="#B8863E"/>
+          </g>
+          <g opacity="0.7">
+            <circle cx="260" cy="440" r="26" fill="#EEF2EC"/>
+            <rect x="252" y="458" width="16" height="36" fill="#EEF2EC"/>
+          </g>
+        </svg>
+      </div>
+      <div class="absolute -bottom-8 -left-8 w-40 rounded-2xl shadow-2xl overflow-hidden border-4 border-white" style="aspect-ratio:1;background:linear-gradient(140deg,var(--brass),#8f6427);">
+        <div class="w-full h-full flex items-center justify-center">
+          <span class="font-display text-white text-4xl font-semibold">25<span class="text-lg align-top">+</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#highlights" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2 text-xs tracking-widest uppercase">
+    Scroll
+    <svg width="18" height="28" viewBox="0 0 18 28" fill="none"><rect x="1" y="1" width="16" height="26" rx="8" stroke="white" stroke-opacity="0.4"/><circle cx="9" cy="9" r="2.5" fill="#D9B478"><animate attributeName="cy" values="9;17;9" dur="1.8s" repeatCount="indefinite"/></circle></svg>
+  </a>
+</section>
+
+<!-- QUICK STATS -->
+<section id="highlights" class="relative z-10 -mt-16 px-6 md:px-10">
+  <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-[var(--sage-2)] overflow-hidden reveal">
+    <div class="p-7 md:p-9 text-center stat-item">
+      <p class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);"><span class="counter" data-target="25">0</span>+</p>
+      <p class="text-xs md:text-sm text-[var(--text-soft)] mt-2 tracking-wide uppercase">Years of Excellence</p>
+    </div>
+    <div class="p-7 md:p-9 text-center stat-item">
+      <p class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);"><span class="counter" data-target="2000">0</span>+</p>
+      <p class="text-xs md:text-sm text-[var(--text-soft)] mt-2 tracking-wide uppercase">Students</p>
+    </div>
+    <div class="p-7 md:p-9 text-center stat-item">
+      <p class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);"><span class="counter" data-target="100">0</span>+</p>
+      <p class="text-xs md:text-sm text-[var(--text-soft)] mt-2 tracking-wide uppercase">Faculty Members</p>
+    </div>
+    <div class="p-7 md:p-9 text-center stat-item">
+      <p class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);"><span class="counter" data-target="95">0</span>%+</p>
+      <p class="text-xs md:text-sm text-[var(--text-soft)] mt-2 tracking-wide uppercase">Academic Success</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="max-w-7xl mx-auto px-6 md:px-10 py-28 grid lg:grid-cols-2 gap-16 items-center">
+  <div class="reveal-left relative order-2 lg:order-1">
+    <div class="rounded-[28px] overflow-hidden shadow-xl" style="aspect-ratio:4/5;background:linear-gradient(150deg,var(--sage),var(--sage-2));">
+      <svg viewBox="0 0 400 500" class="w-full h-full">
+        <rect width="400" height="500" fill="#EEF2EC"/>
+        <rect x="40" y="220" width="320" height="240" rx="10" fill="#123638"/>
+        <rect x="70" y="250" width="60" height="70" fill="#B8863E" opacity="0.8"/>
+        <rect x="150" y="250" width="60" height="70" fill="#D9B478" opacity="0.8"/>
+        <rect x="230" y="250" width="60" height="70" fill="#B8863E" opacity="0.6"/>
+        <rect x="150" y="340" width="100" height="120" fill="#0A2223"/>
+        <circle cx="200" cy="120" r="70" fill="#0E2A2B" opacity="0.08"/>
+        <path d="M100 210 L200 140 L300 210 Z" fill="#0E2A2B"/>
+      </svg>
+    </div>
+    <div class="absolute -bottom-10 -right-6 md:-right-10 w-44 md:w-52 bg-white rounded-2xl shadow-2xl p-5 border border-[var(--sage-2)]">
+      <p class="font-display text-3xl font-semibold" style="color:var(--brass);">2027–28</p>
+      <p class="text-xs text-[var(--text-soft)] mt-1 uppercase tracking-wide">Admissions now open across all grades</p>
+    </div>
+  </div>
+
+  <div class="reveal-right order-1 lg:order-2">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="divider-brass"></span>
+      <span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">About Us</span>
+    </div>
+    <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight mb-6" style="color:var(--ink);">A school built around how children actually grow.</h2>
+    <p class="text-[var(--text-soft)] leading-relaxed mb-4">For over two decades, Meridian Hill has combined a rigorous academic foundation with a genuine focus on curiosity, character and confidence. Our 12-acre campus brings together modern classrooms, expansive playing fields and dedicated spaces for art, music and science — all shaped around the developmental needs of each age group.</p>
+    <p class="text-[var(--text-soft)] leading-relaxed mb-8">We believe a great education is not measured only in results, but in the kind of adults our students become.</p>
+
+    <div class="grid sm:grid-cols-2 gap-5 mb-9">
+      <div class="p-5 rounded-2xl" style="background:var(--sage);">
+        <p class="font-display font-semibold text-lg mb-1" style="color:var(--ink);">Our Vision</p>
+        <p class="text-sm text-[var(--text-soft)]">To nurture confident, compassionate learners equipped to shape a changing world.</p>
+      </div>
+      <div class="p-5 rounded-2xl" style="background:var(--sage);">
+        <p class="font-display font-semibold text-lg mb-1" style="color:var(--ink);">Our Mission</p>
+        <p class="text-sm text-[var(--text-soft)]">To deliver an education that balances academic depth with creativity, values and wellbeing.</p>
+      </div>
+    </div>
+    <button onclick="openModal('aboutModal')" class="btn-ink px-7 py-3.5 rounded-full font-semibold text-sm">Read More</button>
+  </div>
+</section>
+
+<!-- PRINCIPAL -->
+<section class="py-28" style="background:var(--sage);">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 grid lg:grid-cols-[0.85fr_1.15fr] gap-14 items-center">
+    <div class="reveal-scale relative mx-auto">
+      <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-8 border-white" style="background:linear-gradient(150deg,#1a4547,#0c2b2c);">
+        <svg viewBox="0 0 300 300" class="w-full h-full">
+          <rect width="300" height="300" fill="#123638"/>
+          <circle cx="150" cy="120" r="55" fill="#D9B478"/>
+          <path d="M70 300 Q150 190 230 300 Z" fill="#B8863E"/>
+        </svg>
+      </div>
+      <div class="absolute bottom-2 right-2 md:right-6 w-16 h-16 rounded-full bg-[var(--brass)] flex items-center justify-center shadow-xl">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 19.5V6a2 2 0 0 1 2-2h13v14H7a2 2 0 0 0-2 2Z" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 19.5A2 2 0 0 1 6 17.5h13" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="divider-brass"></span>
+        <span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Principal's Message</span>
+      </div>
+      <p class="font-display text-2xl md:text-3xl italic leading-relaxed mb-6" style="color:var(--ink);">"Every child who walks through our gates carries a different spark. Our work is simply to protect it, and give it room to grow."</p>
+      <p class="font-display font-semibold text-lg" style="color:var(--ink);">Dr. Anjali Rao Mehta</p>
+      <p class="text-sm text-[var(--brass)] mb-6 uppercase tracking-wide">Principal, Meridian Hill School</p>
+      <button onclick="openModal('principalModal')" class="btn-ink px-7 py-3.5 rounded-full font-semibold text-sm">Read Full Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ACADEMICS -->
+<section id="academics" class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+  <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Academics</span><span class="divider-brass"></span></div>
+    <h2 class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);">A learning journey, stage by stage</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 stagger">
+    <!-- cards injected via loop below in JS-free static markup -->
+    <div class="reveal-scale lift bg-white rounded-3xl overflow-hidden shadow-md border border-[var(--sage-2)]" style="--i:0;" data-academic="preprimary">
+      <div class="zoom-wrap h-44 overflow-hidden" style="background:linear-gradient(150deg,#D9B478,#B8863E);">
+        <svg class="zoom-img w-full h-full" viewBox="0 0 300 160"><circle cx="70" cy="60" r="30" fill="#fff" opacity=".85"/><circle cx="150" cy="90" r="22" fill="#fff" opacity=".6"/><circle cx="230" cy="55" r="26" fill="#fff" opacity=".7"/></svg>
+      </div>
+      <div class="p-6">
+        <p class="font-display text-xl font-semibold mb-2" style="color:var(--ink);">Pre-Primary</p>
+        <p class="text-sm text-[var(--text-soft)] mb-4">Play-based learning that builds curiosity, language and motor skills for ages 3–5.</p>
+        <button onclick="openAcademic('preprimary')" class="text-sm font-semibold" style="color:var(--brass);">Learn More →</button>
+      </div>
+    </div>
+
+    <div class="reveal-scale lift bg-white rounded-3xl overflow-hidden shadow-md border border-[var(--sage-2)]" style="--i:1;" data-academic="primary">
+      <div class="zoom-wrap h-44 overflow-hidden" style="background:linear-gradient(150deg,#123638,#0E2A2B);">
+        <svg class="zoom-img w-full h-full" viewBox="0 0 300 160"><rect x="40" y="50" width="60" height="80" fill="#fff" opacity=".8"/><rect x="120" y="30" width="60" height="100" fill="#fff" opacity=".55"/><rect x="200" y="70" width="60" height="60" fill="#fff" opacity=".7"/></svg>
+      </div>
+      <div class="p-6">
+        <p class="font-display text-xl font-semibold mb-2" style="color:var(--ink);">Primary School</p>
+        <p class="text-sm text-[var(--text-soft)] mb-4">Grades 1–5 build strong literacy and numeracy through inquiry-led classrooms.</p>
+        <button onclick="openAcademic('primary')" class="text-sm font-semibold" style="color:var(--brass);">Learn More →</button>
+      </div>
+    </div>
+
+    <div class="reveal-scale lift bg-white rounded-3xl overflow-hidden shadow-md border border-[var(--sage-2)]" style="--i:2;" data-academic="middle">
+      <div class="zoom-wrap h-44 overflow-hidden" style="background:linear-gradient(150deg,#B8863E,#8f6427);">
+        <svg class="zoom-img w-full h-full" viewBox="0 0 300 160"><polygon points="60,40 100,120 20,120" fill="#fff" opacity=".8"/><polygon points="160,20 210,120 110,120" fill="#fff" opacity=".55"/><polygon points="260,50 290,120 230,120" fill="#fff" opacity=".7"/></svg>
+      </div>
+      <div class="p-6">
+        <p class="font-display text-xl font-semibold mb-2" style="color:var(--ink);">Middle School</p>
+        <p class="text-sm text-[var(--text-soft)] mb-4">Grades 6–8 introduce specialised subjects, labs and project-based learning.</p>
+        <button onclick="openAcademic('middle')" class="text-sm font-semibold" style="color:var(--brass);">Learn More →</button>
+      </div>
+    </div>
+
+    <div class="reveal-scale lift bg-white rounded-3xl overflow-hidden shadow-md border border-[var(--sage-2)]" style="--i:0;" data-academic="secondary">
+      <div class="zoom-wrap h-44 overflow-hidden" style="background:linear-gradient(150deg,#0E2A2B,#123638);">
+        <svg class="zoom-img w-full h-full" viewBox="0 0 300 160"><rect x="30" y="60" width="240" height="14" fill="#fff" opacity=".7"/><rect x="30" y="86" width="180" height="14" fill="#fff" opacity=".5"/><rect x="30" y="112" width="210" height="14" fill="#fff" opacity=".6"/></svg>
+      </div>
+      <div class="p-6">
+        <p class="font-display text-xl font-semibold mb-2" style="color:var(--ink);">Secondary School</p>
+        <p class="text-sm text-[var(--text-soft)] mb-4">Grades 9–10 (CBSE) build board-exam readiness with strong subject mastery.</p>
+        <button onclick="openAcademic('secondary')" class="text-sm font-semibold" style="color:var(--brass);">Learn More →</button>
+      </div>
+    </div>
+
+    <div class="reveal-scale lift bg-white rounded-3xl overflow-hidden shadow-md border border-[var(--sage-2)]" style="--i:1;" data-academic="senior">
+      <div class="zoom-wrap h-44 overflow-hidden" style="background:linear-gradient(150deg,#D9B478,#123638);">
+        <svg class="zoom-img w-full h-full" viewBox="0 0 300 160"><circle cx="150" cy="80" r="55" fill="#fff" opacity=".2"/><circle cx="150" cy="80" r="35" fill="#fff" opacity=".5"/><circle cx="150" cy="80" r="15" fill="#fff" opacity=".85"/></svg>
+      </div>
+      <div class="p-6">
+        <p class="font-display text-xl font-semibold mb-2" style="color:var(--ink);">Senior Secondary</p>
+        <p class="text-sm text-[var(--text-soft)] mb-4">Grades 11–12 offer Science, Commerce and Humanities streams with career guidance.</p>
+        <button onclick="openAcademic('senior')" class="text-sm font-semibold" style="color:var(--brass);">Learn More →</button>
+      </div>
+    </div>
+
+    <div class="reveal-scale lift rounded-3xl overflow-hidden shadow-md flex flex-col justify-center p-8 text-white" style="--i:2;background:linear-gradient(155deg,var(--ink),var(--ink-2));">
+      <p class="font-display text-2xl font-semibold mb-3">A curriculum that grows with your child</p>
+      <p class="text-white/70 text-sm mb-6">From first stories to final boards, every stage is designed to hand off smoothly into the next.</p>
+      <a href="#admissions" class="text-sm font-semibold" style="color:var(--brass-light);">See admission process →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section id="facilities" class="py-28" style="background:var(--ink);">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass-light);">Facilities</span><span class="divider-brass"></span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold text-white">Everything a child needs to thrive on campus</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" id="facilitiesGrid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- CAMPUS LIFE -->
+<section id="campus-life" class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+  <div class="grid lg:grid-cols-2 gap-4 items-start">
+    <div class="reveal-left lg:sticky lg:top-28">
+      <div class="flex items-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Campus Life</span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold leading-tight mb-6" style="color:var(--ink);">Learning that spills far beyond the classroom</h2>
+      <p class="text-[var(--text-soft)] leading-relaxed mb-6">Sports, culture, clubs and competitions are not extras at Meridian Hill — they're where children learn resilience, teamwork and identity.</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="px-4 py-2 rounded-full text-xs font-semibold" style="background:var(--sage);color:var(--ink);">40+ Clubs &amp; Societies</span>
+        <span class="px-4 py-2 rounded-full text-xs font-semibold" style="background:var(--sage);color:var(--ink);">12 Sports Disciplines</span>
+        <span class="px-4 py-2 rounded-full text-xs font-semibold" style="background:var(--sage);color:var(--ink);">Annual Educational Trips</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 reveal-right">
+      <div class="col-span-2 lift rounded-3xl overflow-hidden h-56" style="background:linear-gradient(150deg,#B8863E,#D9B478);"><svg viewBox="0 0 400 200" class="w-full h-full"><circle cx="90" cy="100" r="42" fill="#fff" opacity=".6"/><circle cx="200" cy="70" r="30" fill="#fff" opacity=".4"/><circle cx="310" cy="110" r="50" fill="#fff" opacity=".5"/></svg></div>
+      <div class="lift rounded-3xl overflow-hidden h-44" style="background:linear-gradient(150deg,#0E2A2B,#123638);"><svg viewBox="0 0 200 180" class="w-full h-full"><rect x="30" y="60" width="140" height="90" fill="#fff" opacity=".3"/><polygon points="100,20 170,60 30,60" fill="#fff" opacity=".5"/></svg></div>
+      <div class="lift rounded-3xl overflow-hidden h-44" style="background:linear-gradient(150deg,#123638,#D9B478);"><svg viewBox="0 0 200 180" class="w-full h-full"><circle cx="100" cy="90" r="60" fill="#fff" opacity=".3"/><circle cx="100" cy="90" r="30" fill="#fff" opacity=".6"/></svg></div>
+      <div class="col-span-2 lift rounded-3xl overflow-hidden h-56" style="background:linear-gradient(150deg,#0A2223,#0E2A2B);"><svg viewBox="0 0 400 200" class="w-full h-full"><rect x="40" y="120" width="60" height="60" fill="#D9B478" opacity=".7"/><rect x="120" y="90" width="60" height="90" fill="#B8863E" opacity=".7"/><rect x="200" y="60" width="60" height="120" fill="#D9B478" opacity=".5"/><rect x="280" y="100" width="60" height="80" fill="#B8863E" opacity=".6"/></svg></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section id="admissions" class="py-28" style="background:var(--sage);">
+  <div class="max-w-6xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+      <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Admissions</span><span class="divider-brass"></span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);">Admissions Open — 2027–28</h2>
+    </div>
+
+    <div class="relative grid md:grid-cols-5 gap-6 mb-16">
+      <div class="hidden md:block absolute top-8 left-[10%] right-[10%] h-0.5" style="background:var(--sage-2);"></div>
+      <div class="reveal" style="--i:0;">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center font-display text-xl font-semibold mb-4 relative z-10" style="background:var(--ink);color:#fff;">1</div>
+        <p class="font-semibold mb-1" style="color:var(--ink);">Submit Enquiry</p>
+        <p class="text-sm text-[var(--text-soft)]">Share basic student and parent details online.</p>
+      </div>
+      <div class="reveal" style="--i:1;">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center font-display text-xl font-semibold mb-4 relative z-10" style="background:var(--ink);color:#fff;">2</div>
+        <p class="font-semibold mb-1" style="color:var(--ink);">Application</p>
+        <p class="text-sm text-[var(--text-soft)]">Complete the formal application with documents.</p>
+      </div>
+      <div class="reveal" style="--i:2;">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center font-display text-xl font-semibold mb-4 relative z-10" style="background:var(--ink);color:#fff;">3</div>
+        <p class="font-semibold mb-1" style="color:var(--ink);">Interaction</p>
+        <p class="text-sm text-[var(--text-soft)]">An informal interaction / age-appropriate assessment.</p>
+      </div>
+      <div class="reveal" style="--i:3;">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center font-display text-xl font-semibold mb-4 relative z-10" style="background:var(--ink);color:#fff;">4</div>
+        <p class="font-semibold mb-1" style="color:var(--ink);">Verification</p>
+        <p class="text-sm text-[var(--text-soft)]">Document verification and fee structure review.</p>
+      </div>
+      <div class="reveal" style="--i:4;">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center font-display text-xl font-semibold mb-4 relative z-10" style="background:var(--brass);color:#fff;">5</div>
+        <p class="font-semibold mb-1" style="color:var(--ink);">Confirmation</p>
+        <p class="text-sm text-[var(--text-soft)]">Seat confirmation and welcome onboarding.</p>
+      </div>
+    </div>
+
+    <div class="reveal-scale bg-white rounded-3xl shadow-xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+      <div>
+        <p class="font-display text-2xl font-semibold mb-2" style="color:var(--ink);">Ready to begin the journey?</p>
+        <p class="text-[var(--text-soft)] text-sm max-w-md">Limited seats remain across Grades 1–10 for the 2027–28 academic session.</p>
+      </div>
+      <div class="flex flex-wrap gap-3 justify-center">
+        <button onclick="openModal('admissionModal')" class="btn-brass px-6 py-3 rounded-full font-semibold text-sm whitespace-nowrap">Apply Now</button>
+        <button onclick="openModal('brochureModal')" class="btn-ink px-6 py-3 rounded-full font-semibold text-sm whitespace-nowrap">Download Brochure</button>
+        <a href="#contact" class="border-2 px-6 py-3 rounded-full font-semibold text-sm whitespace-nowrap text-center" style="border-color:var(--ink);color:var(--ink);">Talk to Admissions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events" class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+  <div class="flex flex-wrap items-end justify-between gap-6 mb-14 reveal">
+    <div>
+      <div class="flex items-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Events</span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);">What's happening on campus</h2>
+    </div>
+    <button onclick="openModal('allEventsModal')" class="text-sm font-semibold border-b-2 pb-1" style="color:var(--ink);border-color:var(--brass);">View All Events →</button>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-7" id="eventsGrid"></div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="py-28" style="background:var(--sage);">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="text-center max-w-2xl mx-auto mb-12 reveal">
+      <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Gallery</span><span class="divider-brass"></span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);">Moments from campus life</h2>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2 mb-10" id="galleryFilters"></div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="galleryGrid"></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="max-w-7xl mx-auto px-6 md:px-10 py-28">
+  <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+    <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Achievements</span><span class="divider-brass"></span></div>
+    <h2 class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);">Recognised for excellence, year after year</h2>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 mb-16">
+    <div class="reveal-scale text-center p-8 rounded-3xl border border-[var(--sage-2)]" style="--i:0;">
+      <p class="font-display text-4xl font-semibold" style="color:var(--brass);"><span class="counter" data-target="340">0</span>+</p>
+      <p class="text-sm text-[var(--text-soft)] mt-2">Olympiad Medals</p>
+    </div>
+    <div class="reveal-scale text-center p-8 rounded-3xl border border-[var(--sage-2)]" style="--i:1;">
+      <p class="font-display text-4xl font-semibold" style="color:var(--brass);"><span class="counter" data-target="58">0</span></p>
+      <p class="text-sm text-[var(--text-soft)] mt-2">National Sports Titles</p>
+    </div>
+    <div class="reveal-scale text-center p-8 rounded-3xl border border-[var(--sage-2)]" style="--i:2;">
+      <p class="font-display text-4xl font-semibold" style="color:var(--brass);"><span class="counter" data-target="120">0</span>+</p>
+      <p class="text-sm text-[var(--text-soft)] mt-2">Competition Wins</p>
+    </div>
+    <div class="reveal-scale text-center p-8 rounded-3xl border border-[var(--sage-2)]" style="--i:3;">
+      <p class="font-display text-4xl font-semibold" style="color:var(--brass);"><span class="counter" data-target="99">0</span>%</p>
+      <p class="text-sm text-[var(--text-soft)] mt-2">Board Pass Rate</p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="reveal-left p-7 rounded-3xl" style="background:var(--sage);">
+      <p class="font-display font-semibold text-lg mb-2" style="color:var(--ink);">Academic</p>
+      <p class="text-sm text-[var(--text-soft)]">12 National Merit Scholars and consistent top-1% CBSE board results across the last five sessions.</p>
+    </div>
+    <div class="reveal p-7 rounded-3xl" style="background:var(--sage);">
+      <p class="font-display font-semibold text-lg mb-2" style="color:var(--ink);">Sports</p>
+      <p class="text-sm text-[var(--text-soft)]">State champions in basketball and athletics; 6 students representing national junior teams.</p>
+    </div>
+    <div class="reveal-right p-7 rounded-3xl" style="background:var(--sage);">
+      <p class="font-display font-semibold text-lg mb-2" style="color:var(--ink);">Olympiads &amp; Competitions</p>
+      <p class="text-sm text-[var(--text-soft)]">Regular top rankers in Math, Science and Cyber Olympiads at the national level.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="py-28 overflow-hidden" style="background:var(--ink);">
+  <div class="max-w-4xl mx-auto px-6 md:px-10 text-center mb-14 reveal">
+    <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass-light);">Testimonials</span><span class="divider-brass"></span></div>
+    <h2 class="font-display text-4xl md:text-5xl font-semibold text-white">What our community says</h2>
+  </div>
+
+  <div class="max-w-3xl mx-auto px-6 relative">
+    <div class="overflow-hidden">
+      <div class="carousel-track flex" id="testiTrack"></div>
+    </div>
+    <div class="flex items-center justify-center gap-6 mt-10">
+      <button onclick="moveTesti(-1)" class="w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition">←</button>
+      <div class="flex gap-2" id="testiDots"></div>
+      <button onclick="moveTesti(1)" class="w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="max-w-6xl mx-auto px-6 md:px-10 py-28">
+  <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+    <div class="flex items-center justify-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">News &amp; Announcements</span><span class="divider-brass"></span></div>
+    <h2 class="font-display text-4xl md:text-5xl font-semibold" style="color:var(--ink);">Latest from Meridian Hill</h2>
+  </div>
+  <div class="space-y-4" id="newsList"></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="py-28" style="background:var(--sage);">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 grid lg:grid-cols-2 gap-14">
+    <div class="reveal-left">
+      <div class="flex items-center gap-3 mb-5"><span class="divider-brass"></span><span class="text-[13px] tracking-widest uppercase font-medium" style="color:var(--brass);">Contact</span></div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold mb-8" style="color:var(--ink);">Come see the campus for yourself</h2>
+
+      <div class="space-y-5 mb-8">
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style="background:var(--ink);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.4 7-12.6A7 7 0 0 0 5 9.4C5 14.6 12 22 12 22Z" stroke="#B8863E" stroke-width="1.6"/><circle cx="12" cy="9.4" r="2.5" stroke="#B8863E" stroke-width="1.6"/></svg></div>
+          <div><p class="font-semibold" style="color:var(--ink);">Address</p><p class="text-sm text-[var(--text-soft)]">42 Hilltop Avenue, Sector 29, Gurugram, Haryana 122001</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style="background:var(--ink);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2C9.5 22 2 14.5 2 7a2 2 0 0 1 2-2Z" stroke="#B8863E" stroke-width="1.6"/></svg></div>
+          <div><p class="font-semibold" style="color:var(--ink);">Phone</p><p class="text-sm text-[var(--text-soft)]">+91 124 456 7890</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style="background:var(--ink);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3V6Z" stroke="#B8863E" stroke-width="1.6"/><path d="m3 7 9 6 9-6" stroke="#B8863E" stroke-width="1.6"/></svg></div>
+          <div><p class="font-semibold" style="color:var(--ink);">Email</p><p class="text-sm text-[var(--text-soft)]">admissions@meridianhill.edu.in</p></div>
+        </div>
+        <div class="flex items-start gap-4">
+          <div class="w-11 h-11 rounded-full flex items-center justify-center shrink-0" style="background:var(--ink);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#B8863E" stroke-width="1.6"/><path d="M12 7v5l3 3" stroke="#B8863E" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+          <div><p class="font-semibold" style="color:var(--ink);">Office Timings</p><p class="text-sm text-[var(--text-soft)]">Mon – Sat, 8:00 AM – 4:00 PM</p></div>
+        </div>
+      </div>
+
+      <div class="rounded-3xl overflow-hidden shadow-lg h-56" style="background:linear-gradient(150deg,#123638,#0A2223);">
+        <svg viewBox="0 0 500 220" class="w-full h-full">
+          <line x1="0" y1="60" x2="500" y2="60" stroke="#B8863E" stroke-width="1" opacity=".3"/>
+          <line x1="0" y1="120" x2="500" y2="120" stroke="#B8863E" stroke-width="1" opacity=".3"/>
+          <line x1="0" y1="180" x2="500" y2="180" stroke="#B8863E" stroke-width="1" opacity=".3"/>
+          <line x1="120" y1="0" x2="120" y2="220" stroke="#B8863E" stroke-width="1" opacity=".3"/>
+          <line x1="260" y1="0" x2="260" y2="220" stroke="#B8863E" stroke-width="1" opacity=".3"/>
+          <line x1="380" y1="0" x2="380" y2="220" stroke="#B8863E" stroke-width="1" opacity=".3"/>
+          <circle cx="260" cy="110" r="10" fill="#B8863E"/>
+          <circle cx="260" cy="110" r="22" stroke="#B8863E" stroke-width="1.5" fill="none" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="reveal-right bg-white rounded-3xl shadow-xl p-8 md:p-10">
+      <p class="font-display text-2xl font-semibold mb-6" style="color:var(--ink);">Send us an enquiry</p>
+      <form id="contactForm" class="space-y-5" novalidate>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Name</label>
+          <input type="text" name="name" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="Your full name">
+          <p class="err text-xs text-red-500 mt-1 hidden">Please enter your name.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Email</label>
+            <input type="email" name="email" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="you@email.com">
+            <p class="err text-xs text-red-500 mt-1 hidden">Enter a valid email.</p>
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Phone</label>
+            <input type="tel" name="phone" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="10-digit number">
+            <p class="err text-xs text-red-500 mt-1 hidden">Enter a valid phone number.</p>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Subject</label>
+          <input type="text" name="subject" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="e.g. Admission for Grade 3">
+          <p class="err text-xs text-red-500 mt-1 hidden">Please enter a subject.</p>
+        </div>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Message</label>
+          <textarea name="message" required rows="4" class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="Tell us how we can help"></textarea>
+          <p class="err text-xs text-red-500 mt-1 hidden">Please enter a message.</p>
+        </div>
+        <button type="submit" class="btn-brass w-full py-3.5 rounded-full font-semibold text-sm">Send Enquiry</button>
+        <p id="contactSuccess" class="hidden text-sm text-center font-medium py-2 rounded-xl" style="background:#e7f5ea;color:#1e7a3a;">Thank you — your enquiry has been sent. Our admissions team will reach out shortly.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--ink-2);">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 pt-20 pb-10">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <svg width="38" height="38" viewBox="0 0 42 42" fill="none"><polygon points="21,3 39,13 21,23 3,13" fill="#D9B478"/><polygon points="21,13 39,23 21,33 3,23" fill="#B8863E"/><rect x="18" y="26" width="6" height="12" fill="#D9B478"/></svg>
+          <p class="font-display text-lg font-semibold text-white">Meridian Hill</p>
+        </div>
+        <p class="text-sm text-white/60 leading-relaxed">A CBSE &amp; IB World School nurturing confident, curious learners on a 12-acre campus since 1998.</p>
+        <div class="flex gap-3 mt-6">
+          <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:bg-[var(--brass)] hover:text-white hover:border-[var(--brass)] transition"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.5-3.2h-3V8.2c0-.93.25-1.56 1.6-1.56H16.6V3.9c-.28-.04-1.25-.12-2.37-.12-2.35 0-3.96 1.43-3.96 4.06v2.36H7.7v3.2h2.57V21h3.23Z"/></svg></a>
+          <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:bg-[var(--brass)] hover:text-white hover:border-[var(--brass)] transition"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="YouTube" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:bg-[var(--brass)] hover:text-white hover:border-[var(--brass)] transition"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="5" width="20" height="14" rx="4" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.5v5l4.5-2.5-4.5-2.5Z" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/70 hover:bg-[var(--brass)] hover:text-white hover:border-[var(--brass)] transition"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="8.5" r="1.2" fill="currentColor"/><path d="M8 11v6M12 11v6M12 13.5c0-1.5 1-2.5 2.2-2.5S16 12 16 13.5V17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <p class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Quick Links</p>
+        <ul class="space-y-2.5 text-sm text-white/60">
+          <li><a href="#about" class="hover:text-[var(--brass-light)] transition">About Us</a></li>
+          <li><a href="#campus-life" class="hover:text-[var(--brass-light)] transition">Campus Life</a></li>
+          <li><a href="#events" class="hover:text-[var(--brass-light)] transition">Events</a></li>
+          <li><a href="#gallery" class="hover:text-[var(--brass-light)] transition">Gallery</a></li>
+          <li><a href="#achievements" class="hover:text-[var(--brass-light)] transition">Achievements</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Academics</p>
+        <ul class="space-y-2.5 text-sm text-white/60">
+          <li><a href="#academics" class="hover:text-[var(--brass-light)] transition">Pre-Primary</a></li>
+          <li><a href="#academics" class="hover:text-[var(--brass-light)] transition">Primary School</a></li>
+          <li><a href="#academics" class="hover:text-[var(--brass-light)] transition">Middle School</a></li>
+          <li><a href="#academics" class="hover:text-[var(--brass-light)] transition">Secondary School</a></li>
+          <li><a href="#admissions" class="hover:text-[var(--brass-light)] transition">Admissions</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-white font-semibold mb-4 text-sm uppercase tracking-wide">Contact</p>
+        <ul class="space-y-2.5 text-sm text-white/60">
+          <li>42 Hilltop Avenue, Sector 29,<br/>Gurugram, Haryana 122001</li>
+          <li>+91 124 456 7890</li>
+          <li>admissions@meridianhill.edu.in</li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
+      <p>© 2026 Meridian Hill School. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white/70 transition">Privacy Policy</a>
+        <a href="#" class="hover:text-white/70 transition">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+<button id="scrollTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full shadow-xl flex items-center justify-center z-40 opacity-0 pointer-events-none transition-all duration-300" style="background:var(--ink);">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 19V5M5 12l7-7 7 7" stroke="#D9B478" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- ================= MODALS ================= -->
+
+<!-- Welcome Modal -->
+<div id="welcomeModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl relative">
+    <button onclick="closeModal('welcomeModal')" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 flex items-center justify-center z-10 shadow">✕</button>
+    <div class="h-40" style="background:linear-gradient(150deg,var(--ink),var(--ink-2));">
+      <svg viewBox="0 0 400 160" class="w-full h-full"><circle cx="330" cy="30" r="26" fill="#D9B478" opacity=".8"/><polygon points="60,140 140,80 220,140" fill="#123638"/><polygon points="180,140 260,60 340,140" fill="#0F3132"/></svg>
+    </div>
+    <div class="p-8 text-center">
+      <p class="font-display text-2xl font-semibold mb-2" style="color:var(--ink);">Welcome to Meridian Hill</p>
+      <p class="text-sm mb-1" style="color:var(--brass);">Admissions Open for Academic Session 2027–28</p>
+      <p class="text-sm text-[var(--text-soft)] mb-6">Discover a campus where academics, creativity and character grow side by side.</p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <button onclick="closeModal('welcomeModal')" class="flex-1 border-2 py-3 rounded-full font-semibold text-sm" style="border-color:var(--ink);color:var(--ink);">Explore School</button>
+        <button onclick="closeModal('welcomeModal');openModal('admissionModal')" class="flex-1 btn-brass py-3 rounded-full font-semibold text-sm">Apply Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Modal -->
+<div id="aboutModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-[var(--sage-2)]">
+      <p class="font-display text-2xl font-semibold" style="color:var(--ink);">About Meridian Hill School</p>
+      <button onclick="closeModal('aboutModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto space-y-4 text-sm text-[var(--text-soft)] leading-relaxed">
+      <p>Founded in 1998, Meridian Hill School has grown from a single block of classrooms into a 12-acre campus serving over 2,000 students from Pre-Primary through Grade 12. We are affiliated with the CBSE board and offer the IB Diploma Programme in our senior years.</p>
+      <p><strong style="color:var(--ink);">Our Vision:</strong> To nurture confident, compassionate learners equipped to shape a changing world through knowledge, empathy and courage.</p>
+      <p><strong style="color:var(--ink);">Our Mission:</strong> To deliver an education that balances academic depth with creativity, strong values and genuine wellbeing — supported by outstanding faculty and modern facilities.</p>
+      <p><strong style="color:var(--ink);">Our Approach:</strong> Small class sizes, individual mentorship, and a belief that every child learns differently. We combine structured academics with the arts, sport and community service so students leave not just qualified, but ready.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Principal Modal -->
+<div id="principalModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-[var(--sage-2)]">
+      <p class="font-display text-2xl font-semibold" style="color:var(--ink);">Principal's Full Message</p>
+      <button onclick="closeModal('principalModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto space-y-4 text-sm text-[var(--text-soft)] leading-relaxed">
+      <p>Dear Parents and Students,</p>
+      <p>Every child who walks through our gates carries a different spark — a curiosity, a talent, a way of seeing the world. Our work at Meridian Hill is simply to protect that spark, and give it room to grow.</p>
+      <p>We do not believe in a single definition of success. Some of our students will excel in mathematics, others on the football field, others in a paintbrush or a debate podium. Our role is to give each of them the guidance, structure and encouragement to become the best version of themselves.</p>
+      <p>I invite you to visit our campus, meet our faculty, and see for yourself the warmth and rigour that define a Meridian Hill education.</p>
+      <p class="font-display text-lg font-semibold pt-2" style="color:var(--ink);">Dr. Anjali Rao Mehta<br/><span class="text-xs font-normal uppercase tracking-wide" style="color:var(--brass);">Principal, Meridian Hill School</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- Academic detail modal (generic, filled dynamically) -->
+<div id="academicModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-[var(--sage-2)]">
+      <p id="academicTitle" class="font-display text-2xl font-semibold" style="color:var(--ink);"></p>
+      <button onclick="closeModal('academicModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto text-sm text-[var(--text-soft)] leading-relaxed" id="academicBody"></div>
+  </div>
+</div>
+
+<!-- Facility detail modal -->
+<div id="facilityModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+    <div id="facilityImg" class="h-44"></div>
+    <div class="flex items-center justify-between p-6 pb-2">
+      <p id="facilityTitle" class="font-display text-2xl font-semibold" style="color:var(--ink);"></p>
+      <button onclick="closeModal('facilityModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center shrink-0">✕</button>
+    </div>
+    <div class="px-6 pb-6 overflow-y-auto text-sm text-[var(--text-soft)] leading-relaxed" id="facilityBody"></div>
+  </div>
+</div>
+
+<!-- Event detail modal -->
+<div id="eventModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+    <div id="eventImg" class="h-44"></div>
+    <div class="flex items-center justify-between p-6 pb-2">
+      <p id="eventTitle" class="font-display text-2xl font-semibold" style="color:var(--ink);"></p>
+      <button onclick="closeModal('eventModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center shrink-0">✕</button>
+    </div>
+    <div class="px-6 pb-6 overflow-y-auto text-sm text-[var(--text-soft)] leading-relaxed" id="eventBody"></div>
+  </div>
+</div>
+
+<!-- All events modal -->
+<div id="allEventsModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl max-h-[85vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-[var(--sage-2)]">
+      <p class="font-display text-2xl font-semibold" style="color:var(--ink);">All Upcoming Events</p>
+      <button onclick="closeModal('allEventsModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto space-y-3" id="allEventsList"></div>
+  </div>
+</div>
+
+<!-- Admission enquiry modal -->
+<div id="admissionModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl max-h-[90vh] flex flex-col">
+    <div class="flex items-center justify-between p-6 border-b border-[var(--sage-2)]">
+      <p class="font-display text-2xl font-semibold" style="color:var(--ink);">Admission Enquiry</p>
+      <button onclick="closeModal('admissionModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center">✕</button>
+    </div>
+    <div class="p-6 overflow-y-auto">
+      <form id="admissionForm" class="space-y-4" novalidate>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Student Name</label>
+          <input type="text" name="studentName" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="Student's full name">
+          <p class="err text-xs text-red-500 mt-1 hidden">Please enter the student's name.</p>
+        </div>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Parent Name</label>
+          <input type="text" name="parentName" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="Parent / guardian name">
+          <p class="err text-xs text-red-500 mt-1 hidden">Please enter the parent's name.</p>
+        </div>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Class Applying For</label>
+          <select name="classFor" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm bg-white">
+            <option value="">Select class</option>
+            <option>Pre-Primary</option><option>Grade 1</option><option>Grade 2</option><option>Grade 3</option>
+            <option>Grade 4</option><option>Grade 5</option><option>Grade 6</option><option>Grade 7</option>
+            <option>Grade 8</option><option>Grade 9</option><option>Grade 10</option><option>Grade 11</option><option>Grade 12</option>
+          </select>
+          <p class="err text-xs text-red-500 mt-1 hidden">Please select a class.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Phone Number</label>
+            <input type="tel" name="phone" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="10-digit number">
+            <p class="err text-xs text-red-500 mt-1 hidden">Enter a valid phone number.</p>
+          </div>
+          <div>
+            <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Email</label>
+            <input type="email" name="email" required class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="you@email.com">
+            <p class="err text-xs text-red-500 mt-1 hidden">Enter a valid email.</p>
+          </div>
+        </div>
+        <div>
+          <label class="text-sm font-medium block mb-1.5" style="color:var(--ink);">Message</label>
+          <textarea name="message" rows="3" class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm" placeholder="Any questions for our admissions team? (optional)"></textarea>
+        </div>
+        <button type="submit" class="btn-brass w-full py-3.5 rounded-full font-semibold text-sm">Submit Enquiry</button>
+        <p id="admissionSuccess" class="hidden text-sm text-center font-medium py-2 rounded-xl" style="background:#e7f5ea;color:#1e7a3a;">Thank you! Your enquiry has been received — our admissions team will contact you within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Brochure modal -->
+<div id="brochureModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-sm w-full overflow-hidden shadow-2xl text-center p-8">
+    <button onclick="closeModal('brochureModal')" class="absolute mt-[-8px] ml-[calc(100%-56px)] w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center">✕</button>
+    <div class="w-16 h-16 rounded-full mx-auto mb-5 flex items-center justify-center" style="background:var(--sage);"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 3v13m0 0 4-4m-4 4-4-4" stroke="var(--brass)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 19h14" stroke="var(--brass)" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <p class="font-display text-xl font-semibold mb-2" style="color:var(--ink);">Admission Brochure</p>
+    <p class="text-sm text-[var(--text-soft)] mb-6">Enter your email and we'll send the 2027–28 admission brochure straight to your inbox.</p>
+    <input type="email" placeholder="you@email.com" class="w-full border border-[var(--sage-2)] rounded-xl px-4 py-3 text-sm mb-4">
+    <button onclick="showBrochureSent()" class="btn-brass w-full py-3.5 rounded-full font-semibold text-sm">Send Brochure</button>
+    <p id="brochureSent" class="hidden text-sm text-center font-medium py-2 rounded-xl mt-3" style="background:#e7f5ea;color:#1e7a3a;">Sent! Please check your inbox shortly.</p>
+  </div>
+</div>
+
+<!-- Announcement modal -->
+<div id="announceModal" class="modal-backdrop fixed inset-0 z-[90] flex items-center justify-center p-4" style="background:rgba(10,26,27,.72);">
+  <div class="modal-panel bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl">
+    <div class="flex items-center justify-between p-6 border-b border-[var(--sage-2)]">
+      <p id="announceTitle" class="font-display text-xl font-semibold" style="color:var(--ink);"></p>
+      <button onclick="closeModal('announceModal')" class="w-9 h-9 rounded-full hover:bg-[var(--sage)] flex items-center justify-center shrink-0">✕</button>
+    </div>
+    <div class="p-6 text-sm text-[var(--text-soft)] leading-relaxed" id="announceBody"></div>
+  </div>
+</div>
+
+<!-- Gallery Lightbox -->
+<div id="lightbox" class="modal-backdrop fixed inset-0 z-[95] flex items-center justify-center p-4" style="background:rgba(10,26,27,.94);">
+  <button onclick="closeModal('lightbox')" class="absolute top-6 right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-lg">✕</button>
+  <button onclick="lbMove(-1)" class="absolute left-4 md:left-8 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xl">←</button>
+  <button onclick="lbMove(1)" class="absolute right-4 md:right-8 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-xl">→</button>
+  <div class="modal-panel max-w-3xl w-full">
+    <div id="lightboxImg" class="rounded-2xl overflow-hidden shadow-2xl h-[60vh]"></div>
+    <p id="lightboxCaption" class="text-white/70 text-sm text-center mt-4"></p>
+  </div>
+</div>
+
+<script>
+// ---------- Loader ----------
+let loaderHidden=false;
+function hideLoader(){
+  if(loaderHidden) return;
+  loaderHidden=true;
+  const l=document.getElementById('loader');
+  if(l) l.classList.add('hide');
+  setTimeout(()=>{ openModal('welcomeModal'); },1400);
+}
+// Primary: hide once everything (fonts, CDN script) has loaded.
+window.addEventListener('load', ()=>{ setTimeout(hideLoader,300); });
+// Fallback: never let the loader stay up more than 2s, even if 'load' is slow/blocked.
+setTimeout(hideLoader,2000);
+
+// ---------- Modal system ----------
+function openModal(id){
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(id){
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.modal-backdrop').forEach(m=>{
+  m.addEventListener('click', e=>{ if(e.target===m) closeModal(m.id); });
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ document.querySelectorAll('.modal-backdrop.open').forEach(m=>closeModal(m.id)); }
+});
+function showBrochureSent(){ document.getElementById('brochureSent').classList.remove('hidden'); }
+
+// ---------- Nav scroll state ----------
+const nav=document.getElementById('nav');
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY>40) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+  const st=document.getElementById('scrollTop');
+  if(window.scrollY>600){ st.style.opacity='1'; st.style.pointerEvents='auto'; } else { st.style.opacity='0'; st.style.pointerEvents='none'; }
+});
+document.getElementById('scrollTop').addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+// ---------- Mobile menu ----------
+const hamburger=document.getElementById('hamburger'), mobileMenu=document.getElementById('mobileMenu');
+let menuOpen=false;
+hamburger.addEventListener('click',()=>{
+  menuOpen=!menuOpen;
+  mobileMenu.classList.toggle('hidden',!menuOpen);
+  document.getElementById('bar1').style.transform=menuOpen?'translateY(6px) rotate(45deg)':'';
+  document.getElementById('bar2').style.opacity=menuOpen?'0':'1';
+  document.getElementById('bar3').style.transform=menuOpen?'translateY(-6px) rotate(-45deg)':'';
+});
+document.querySelectorAll('.mobile-link').forEach(l=>l.addEventListener('click',()=>{
+  menuOpen=false; mobileMenu.classList.add('hidden');
+  document.getElementById('bar1').style.transform=''; document.getElementById('bar2').style.opacity='1'; document.getElementById('bar3').style.transform='';
+}));
+
+// ---------- Scroll reveal ----------
+const revealEls=document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale');
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+},{threshold:0.15});
+revealEls.forEach(el=>io.observe(el));
+
+// ---------- Animated counters ----------
+const counters=document.querySelectorAll('.counter');
+const cio=new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const el=en.target, target=+el.dataset.target; let cur=0;
+      const step=Math.max(1,Math.ceil(target/60));
+      const t=setInterval(()=>{
+        cur+=step;
+        if(cur>=target){ cur=target; clearInterval(t); }
+        el.textContent=cur;
+      },25);
+      cio.unobserve(el);
+    }
+  });
+},{threshold:0.4});
+counters.forEach(c=>cio.observe(c));
+
+// ---------- Facilities data ----------
+const facilities=[
+  {n:'Smart Classrooms', d:'Interactive boards and digital tools in every classroom for engaging, modern lessons.', c1:'#B8863E',c2:'#D9B478'},
+  {n:'Science Labs', d:'Fully-equipped Physics, Chemistry and Biology labs for hands-on experiential learning.', c1:'#123638',c2:'#0E2A2B'},
+  {n:'Computer Labs', d:'High-speed computer labs supporting coding, robotics and digital literacy from an early age.', c1:'#0E2A2B',c2:'#B8863E'},
+  {n:'Library', d:'A 15,000-volume library with quiet reading zones and a dedicated digital research corner.', c1:'#D9B478',c2:'#123638'},
+  {n:'Sports Complex', d:'Cricket and football grounds, an athletics track, basketball and tennis courts.', c1:'#B8863E',c2:'#0A2223'},
+  {n:'Auditorium', d:'A 600-seat air-conditioned auditorium for assemblies, performances and events.', c1:'#123638',c2:'#D9B478'},
+  {n:'Music &amp; Dance Rooms', d:'Dedicated studios for vocal, instrumental and classical/contemporary dance training.', c1:'#0E2A2B',c2:'#B8863E'},
+  {n:'Art Studio', d:'A light-filled studio for painting, sculpture and mixed-media art classes.', c1:'#D9B478',c2:'#0A2223'},
+  {n:'Cafeteria', d:'A hygienic, nutritionist-approved cafeteria serving fresh meals daily.', c1:'#B8863E',c2:'#123638'},
+  {n:'Transportation', d:'GPS-tracked buses covering all major routes with trained attendants on board.', c1:'#0E2A2B',c2:'#D9B478'},
+  {n:'Medical Room', d:'An on-campus medical room staffed by a full-time nurse during school hours.', c1:'#123638',c2:'#B8863E'},
+  {n:'CCTV &amp; Security', d:'Round-the-clock CCTV monitoring and trained security personnel across campus.', c1:'#0A2223',c2:'#D9B478'}
+];
+const facGrid=document.getElementById('facilitiesGrid');
+facilities.forEach((f,i)=>{
+  const div=document.createElement('div');
+  div.className='reveal-scale lift rounded-2xl overflow-hidden cursor-pointer';
+  div.style.setProperty('--i', i%4);
+  div.style.background='rgba(255,255,255,0.04)';
+  div.style.border='1px solid rgba(255,255,255,0.08)';
+  div.innerHTML=`
+    <div class="zoom-wrap h-32 overflow-hidden" style="background:linear-gradient(145deg,${f.c1},${f.c2});">
+      <svg class="zoom-img w-full h-full" viewBox="0 0 200 120"><circle cx="60" cy="60" r="34" fill="#fff" opacity=".25"/><circle cx="140" cy="50" r="22" fill="#fff" opacity=".3"/></svg>
+    </div>
+    <div class="p-5">
+      <p class="font-display font-semibold text-white mb-1">${f.n}</p>
+      <p class="text-xs text-white/50 line-clamp-2">${f.d}</p>
+    </div>`;
+  div.addEventListener('click',()=>{
+    document.getElementById('facilityTitle').innerHTML=f.n;
+    document.getElementById('facilityBody').innerHTML=`<p class="mb-4">${f.d}</p><p class="font-semibold mb-2" style="color:var(--ink);">Key Features</p><ul class="list-disc pl-5 space-y-1"><li>Maintained to international safety standards</li><li>Supervised by trained staff at all times</li><li>Accessible to all grade levels as per curriculum needs</li></ul>`;
+    document.getElementById('facilityImg').style.background=`linear-gradient(145deg,${f.c1},${f.c2})`;
+    openModal('facilityModal');
+  });
+  facGrid.appendChild(div);
+  io.observe(div);
+});
+
+// ---------- Academics detail content ----------
+const academicDetails={
+  preprimary:{title:'Pre-Primary', body:'Our Pre-Primary programme (ages 3–5) uses a play-based approach to build early language, motor and social skills. Children explore through story-telling, sensory play and guided discovery in bright, safe classrooms designed just for them.'},
+  primary:{title:'Primary School', body:'Grades 1–5 focus on building strong foundations in literacy, numeracy and inquiry. Our teachers use activity-based, collaborative methods so students learn to think, question and express themselves confidently.'},
+  middle:{title:'Middle School', body:'Grades 6–8 introduce subject specialisation, science laboratories and project-based learning. Students begin developing independent study habits alongside a growing range of co-curricular options.'},
+  secondary:{title:'Secondary School', body:'Grades 9–10 follow the CBSE curriculum with a strong emphasis on conceptual clarity and board-exam readiness, supported by regular assessments, doubt-clearing sessions and career counselling.'},
+  senior:{title:'Senior Secondary', body:'Grades 11–12 offer Science, Commerce and Humanities streams (CBSE) along with the IB Diploma Programme, backed by dedicated mentors and university application guidance.'}
+};
+document.querySelectorAll('[data-academic]').forEach(card=>{
+  card.querySelector('button').addEventListener('click',(e)=>{ e.preventDefault(); });
+});
+function openAcademic(key){
+  const d=academicDetails[key];
+  document.getElementById('academicTitle').textContent=d.title;
+  document.getElementById('academicBody').innerHTML=`<p>${d.body}</p>`;
+  openModal('academicModal');
+}
+
+// ---------- Events data ----------
+const events=[
+  {date:'15 DEC', month:'2026', title:'Annual Sports Day', desc:'A full day of inter-house athletics, relay races and team sports on the main field.', c1:'#B8863E',c2:'#D9B478'},
+  {date:'20 NOV', month:'2026', title:'Parent-Teacher Meeting', desc:'One-on-one sessions with class teachers to discuss term progress and next steps.', c1:'#123638',c2:'#0E2A2B'},
+  {date:'05 DEC', month:'2026', title:'Winter Cultural Fest', desc:'Music, dance and drama performances by students across all grade levels.', c1:'#0E2A2B',c2:'#B8863E'},
+  {date:'18 JAN', month:'2027', title:'Science Exhibition', desc:'Student-led experiments and innovation projects open for parents to explore.', c1:'#D9B478',c2:'#123638'},
+  {date:'02 FEB', month:'2027', title:'Inter-School Debate', desc:'Meridian Hill hosts a regional inter-school debate and elocution competition.', c1:'#B8863E',c2:'#0A2223'},
+  {date:'10 MAR', month:'2027', title:'Annual Day Celebration', desc:'A grand evening of performances, awards and celebration of the academic year.', c1:'#123638',c2:'#D9B478'}
+];
+const eventsGrid=document.getElementById('eventsGrid');
+const allEventsList=document.getElementById('allEventsList');
+events.slice(0,3).forEach((ev,i)=>{
+  const card=document.createElement('div');
+  card.className='reveal-scale lift bg-white rounded-3xl overflow-hidden shadow-md border border-[var(--sage-2)] cursor-pointer';
+  card.style.setProperty('--i',i);
+  card.innerHTML=`
+    <div class="zoom-wrap h-40 overflow-hidden relative" style="background:linear-gradient(150deg,${ev.c1},${ev.c2});">
+      <div class="absolute top-3 left-3 bg-white rounded-lg px-3 py-1.5 text-center shadow"><p class="font-display font-bold text-sm leading-none" style="color:var(--ink);">${ev.date}</p><p class="text-[10px] text-[var(--text-soft)]">${ev.month}</p></div>
+      <svg class="zoom-img w-full h-full" viewBox="0 0 300 140"><circle cx="230" cy="100" r="60" fill="#fff" opacity=".15"/></svg>
+    </div>
+    <div class="p-6">
+      <p class="font-display text-lg font-semibold mb-2" style="color:var(--ink);">${ev.title}</p>
+      <p class="text-sm text-[var(--text-soft)] mb-4">${ev.desc}</p>
+      <span class="text-sm font-semibold" style="color:var(--brass);">View Details →</span>
+    </div>`;
+  card.addEventListener('click',()=>{
+    document.getElementById('eventTitle').textContent=ev.title;
+    document.getElementById('eventImg').style.background=`linear-gradient(150deg,${ev.c1},${ev.c2})`;
+    document.getElementById('eventBody').innerHTML=`<p class="mb-3 font-semibold" style="color:var(--brass);">${ev.date} ${ev.month}</p><p>${ev.desc}</p><p class="mt-4 text-xs text-[var(--text-soft)]">All parents and students are welcome. For queries, contact the school office.</p>`;
+    openModal('eventModal');
+  });
+  eventsGrid.appendChild(card);
+  io.observe(card);
+});
+events.forEach(ev=>{
+  const row=document.createElement('div');
+  row.className='flex items-center gap-4 p-4 rounded-2xl cursor-pointer hover:bg-[var(--sage)] transition';
+  row.innerHTML=`<div class="w-14 h-14 rounded-xl flex flex-col items-center justify-center shrink-0" style="background:linear-gradient(150deg,${ev.c1},${ev.c2});"><p class="text-white font-display font-bold text-xs leading-none">${ev.date.split(' ')[0]}</p><p class="text-white/80 text-[9px]">${ev.date.split(' ')[1]}</p></div><div><p class="font-semibold text-sm" style="color:var(--ink);">${ev.title}</p><p class="text-xs text-[var(--text-soft)]">${ev.desc}</p></div>`;
+  row.addEventListener('click',()=>{
+    document.getElementById('eventTitle').textContent=ev.title;
+    document.getElementById('eventImg').style.background=`linear-gradient(150deg,${ev.c1},${ev.c2})`;
+    document.getElementById('eventBody').innerHTML=`<p class="mb-3 font-semibold" style="color:var(--brass);">${ev.date} ${ev.month}</p><p>${ev.desc}</p>`;
+    closeModal('allEventsModal');
+    openModal('eventModal');
+  });
+  allEventsList.appendChild(row);
+});
+
+// ---------- Gallery ----------
+const galleryData=[
+  {cat:'Campus', c1:'#123638',c2:'#0E2A2B', title:'Main Academic Block'},
+  {cat:'Classrooms', c1:'#B8863E',c2:'#D9B478', title:'Smart Classroom in Session'},
+  {cat:'Sports', c1:'#0E2A2B',c2:'#B8863E', title:'Inter-House Football Match'},
+  {cat:'Events', c1:'#D9B478',c2:'#123638', title:'Annual Day Performance'},
+  {cat:'Students', c1:'#0A2223',c2:'#D9B478', title:'Students in the Library'},
+  {cat:'Activities', c1:'#B8863E',c2:'#0A2223', title:'Art Studio Workshop'},
+  {cat:'Campus', c1:'#123638',c2:'#D9B478', title:'Central Courtyard'},
+  {cat:'Classrooms', c1:'#0E2A2B',c2:'#0A2223', title:'Science Lab Session'},
+  {cat:'Sports', c1:'#D9B478',c2:'#B8863E', title:'Athletics Meet'},
+  {cat:'Events', c1:'#123638',c2:'#B8863E', title:'Science Exhibition Day'},
+  {cat:'Students', c1:'#B8863E',c2:'#123638', title:'Morning Assembly'},
+  {cat:'Activities', c1:'#0A2223',c2:'#B8863E', title:'Music Room Rehearsal'}
+];
+const galleryGrid=document.getElementById('galleryGrid');
+const galleryFilters=document.getElementById('galleryFilters');
+const cats=['All',...new Set(galleryData.map(g=>g.cat))];
+let activeCat='All', lbIndex=0, filtered=galleryData;
+
+cats.forEach(cat=>{
+  const b=document.createElement('button');
+  b.textContent=cat;
+  b.className='px-5 py-2 rounded-full text-sm font-medium transition gallery-filter-btn';
+  b.style.cssText= cat==='All' ? 'background:var(--ink);color:#fff;' : 'background:#fff;color:var(--ink);border:1px solid var(--sage-2);';
+  b.addEventListener('click',()=>{
+    activeCat=cat;
+    document.querySelectorAll('.gallery-filter-btn').forEach(btn=>{
+      btn.style.cssText = btn.textContent===cat ? 'background:var(--ink);color:#fff;' : 'background:#fff;color:var(--ink);border:1px solid var(--sage-2);';
+    });
+    renderGallery();
+  });
+  galleryFilters.appendChild(b);
+});
+
+function renderGallery(){
+  galleryGrid.innerHTML='';
+  filtered = activeCat==='All' ? galleryData : galleryData.filter(g=>g.cat===activeCat);
+  filtered.forEach((g,i)=>{
+    const div=document.createElement('div');
+    div.className='reveal-scale zoom-wrap rounded-2xl overflow-hidden cursor-pointer shadow-md aspect-square';
+    div.style.setProperty('--i', i%4);
+    div.style.background=`linear-gradient(150deg,${g.c1},${g.c2})`;
+    div.innerHTML=`<svg class="zoom-img w-full h-full" viewBox="0 0 200 200"><circle cx="60" cy="140" r="50" fill="#fff" opacity=".18"/><circle cx="150" cy="60" r="36" fill="#fff" opacity=".22"/></svg>
+      <div class="relative -mt-10 px-4 pb-3"><p class="text-white text-xs font-semibold drop-shadow">${g.title}</p></div>`;
+    div.addEventListener('click',()=>{ lbIndex=i; openLightbox(); });
+    galleryGrid.appendChild(div);
+    io.observe(div);
+  });
+}
+renderGallery();
+
+function openLightbox(){
+  const g=filtered[lbIndex];
+  document.getElementById('lightboxImg').style.background=`linear-gradient(150deg,${g.c1},${g.c2})`;
+  document.getElementById('lightboxImg').innerHTML=`<svg viewBox="0 0 400 300" class="w-full h-full"><circle cx="120" cy="220" r="90" fill="#fff" opacity=".15"/><circle cx="300" cy="90" r="60" fill="#fff" opacity=".2"/></svg>`;
+  document.getElementById('lightboxCaption').textContent=`${g.title} — ${g.cat}`;
+  openModal('lightbox');
+}
+function lbMove(dir){
+  lbIndex=(lbIndex+dir+filtered.length)%filtered.length;
+  openLightbox();
+}
+
+// ---------- Testimonials ----------
+const testimonials=[
+  {name:'Ritu Sharma', rel:'Parent, Grade 4', text:'Meridian Hill has given my daughter a genuine love for learning. The teachers know her by name and truly care about her growth.'},
+  {name:'Arjun Verma', rel:'Alumnus, Batch of 2021', text:'The school pushed me academically while giving me the space to explore music and debate. I carry both into university today.'},
+  {name:'Kavita &amp; Sanjay Nair', rel:'Parents, Grade 7 &amp; Grade 2', text:'Both our children are at Meridian Hill and the difference in their confidence over two years has been remarkable.'},
+  {name:'Meher Kapoor', rel:'Student, Grade 11', text:'I love that we are never just told the answer — teachers actually want us to figure things out and ask questions.'}
+];
+const testiTrack=document.getElementById('testiTrack');
+const testiDots=document.getElementById('testiDots');
+let testiIdx=0;
+testimonials.forEach((t,i)=>{
+  const slide=document.createElement('div');
+  slide.className='w-full shrink-0 px-2';
+  slide.innerHTML=`<div class="text-center">
+    <div class="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center font-display text-xl font-semibold text-white" style="background:linear-gradient(150deg,var(--brass),#8f6427);">${t.name.charAt(0)}</div>
+    <p class="font-display text-xl md:text-2xl italic text-white/90 leading-relaxed mb-6">"${t.text}"</p>
+    <p class="text-white font-semibold">${t.name}</p>
+    <p class="text-sm" style="color:var(--brass-light);">${t.rel}</p>
+  </div>`;
+  testiTrack.appendChild(slide);
+  const dot=document.createElement('button');
+  dot.className='w-2.5 h-2.5 rounded-full transition';
+  dot.style.background= i===0 ? 'var(--brass)' : 'rgba(255,255,255,.25)';
+  dot.addEventListener('click',()=>{ testiIdx=i; updateTesti(); });
+  testiDots.appendChild(dot);
+});
+function updateTesti(){
+  testiTrack.style.transform=`translateX(-${testiIdx*100}%)`;
+  [...testiDots.children].forEach((d,i)=>d.style.background = i===testiIdx ? 'var(--brass)' : 'rgba(255,255,255,.25)');
+}
+function moveTesti(dir){ testiIdx=(testiIdx+dir+testimonials.length)%testimonials.length; updateTesti(); }
+let testiAuto=setInterval(()=>moveTesti(1),5500);
+
+// ---------- News ----------
+const news=[
+  {title:'Admissions Open for 2027–28', date:'01 Nov 2026', body:'Applications are now open for all grades for the upcoming academic session. Early applicants receive priority scheduling for interactions.'},
+  {title:'Annual Sports Day — 15 December', date:'28 Oct 2026', body:'Join us for a full day of inter-house competitions, relay races and award ceremonies on the main sports field, starting 8:30 AM.'},
+  {title:'Parent-Teacher Meeting — 20 November', date:'15 Oct 2026', body:'Scheduled one-on-one meetings with class teachers will be held from 9 AM to 1 PM. Slots can be booked through the school office.'}
+];
+const newsList=document.getElementById('newsList');
+news.forEach(n=>{
+  const row=document.createElement('div');
+  row.className='reveal flex items-center justify-between gap-4 p-6 rounded-2xl border border-[var(--sage-2)] cursor-pointer hover:shadow-lg transition';
+  row.innerHTML=`<div><p class="font-display font-semibold text-lg mb-1" style="color:var(--ink);">${n.title}</p><p class="text-xs text-[var(--text-soft)]">${n.date}</p></div><span class="text-sm font-semibold shrink-0" style="color:var(--brass);">Read →</span>`;
+  row.addEventListener('click',()=>{
+    document.getElementById('announceTitle').textContent=n.title;
+    document.getElementById('announceBody').innerHTML=`<p class="text-xs mb-3" style="color:var(--brass);">${n.date}</p><p>${n.body}</p>`;
+    openModal('announceModal');
+  });
+  newsList.appendChild(row);
+  io.observe(row);
+});
+
+// ---------- Form validation ----------
+function validateForm(form){
+  let valid=true;
+  form.querySelectorAll('[required]').forEach(field=>{
+    const errEl=field.parentElement.querySelector('.err');
+    let fieldValid=true;
+    if(field.type==='email'){ fieldValid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value.trim()); }
+    else if(field.type==='tel'){ fieldValid=/^[0-9]{10}$/.test(field.value.replace(/\D/g,'')); }
+    else { fieldValid=field.value.trim().length>0; }
+    if(!fieldValid){ valid=false; if(errEl) errEl.classList.remove('hidden'); field.classList.add('border-red-400'); }
+    else { if(errEl) errEl.classList.add('hidden'); field.classList.remove('border-red-400'); }
+  });
+  return valid;
+}
+document.getElementById('contactForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  if(validateForm(e.target)){
+    document.getElementById('contactSuccess').classList.remove('hidden');
+    e.target.reset();
+    setTimeout(()=>document.getElementById('contactSuccess').classList.add('hidden'),6000);
+  }
+});
+document.getElementById('admissionForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  if(validateForm(e.target)){
+    document.getElementById('admissionSuccess').classList.remove('hidden');
+    e.target.reset();
+    setTimeout(()=>{ document.getElementById('admissionSuccess').classList.add('hidden'); closeModal('admissionModal'); },2600);
+  }
+});
+</script>
+</body>
+</html>
